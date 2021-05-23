@@ -4,7 +4,7 @@
 #include "hal.h"
 
 bool button_pressed() {
-  return HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_SET;
+  return HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_15) == GPIO_PIN_RESET;
 }
 
 void green_only() {

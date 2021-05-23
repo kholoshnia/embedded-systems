@@ -25,33 +25,31 @@ const unsigned int led_animation[frames][led_number] = {
     {0, 0, 0, 0, 0, 1, 1, 0},
 };
 
-void animate(const unsigned int &animation_state) {
+void animate(const unsigned int &state) {
   green_only();
-  bool pause = false;
 
-  GPIO_PinState state;
+  GPIO_PinState pin_state;
   for (unsigned int frame = 0; frame < frames; ++frame) {
     for (unsigned int led = 0; led < led_number; ++led) {
-      state = led_animation[frame][led] == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET;
-      HAL_GPIO_WritePin(GPIOD, led_list[led], state);
+      pin_state = led_animation[frame][led] == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET;
+      HAL_GPIO_WritePin(GPIOD, led_list[led], pin_state);
     }
 
     HAL_Delay(delay);
 
     if (button_pressed()) {
-      pause = !pause;
-    }
-
-    while (pause) {
+      HAL_Delay(delay);
       red_only();
 
-      if (button_pressed()) {
-        green_only();
-        pause = false;
+      while (true) {
+        if (button_pressed() || get_switches_state() != state) {
+          green_only();
+          break;
+        }
       }
     }
 
-    if (get_switches_state() != animation_state) {
+    if (get_switches_state() != state) {
       break;
     }
   }
