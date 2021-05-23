@@ -5,18 +5,14 @@
 
 const unsigned int delay = 500;
 const unsigned int delay_delta = 200;
-unsigned int delay_number = 0;
 
 void TIM6_IRQ_Handler() {
   animation();
 }
 
 void TIM7_IRQ_Handler() {
-  delay_number = get_delay_number();
-  WRITE_REG(TIM6_ARR, delay + delay_number * delay_delta);
+  WRITE_REG(TIM6_ARR, delay + get_delay_number() * delay_delta);
 }
-
-void
 
 int umain() {
   registerTIM6_IRQHandler(TIM6_IRQ_Handler);
@@ -24,11 +20,11 @@ int umain() {
 
   __enable_irq();
 
-  WRITE_REG(TIM6_ARR, delay + delay_number * delay_delta);
+  WRITE_REG(TIM6_ARR, delay + get_delay_number() * delay_delta);
   WRITE_REG(TIM6_DIER, TIM_DIER_UIE);
   WRITE_REG(TIM6_PSC, 0);
 
-  WRITE_REG(TIM7_ARR, 1);
+  WRITE_REG(TIM7_ARR, 100);
   WRITE_REG(TIM7_DIER, TIM_DIER_UIE);
   WRITE_REG(TIM7_PSC, 0);
 
