@@ -1,2 +1,2 @@
-# embedded-systems
+# Embedded systems
 Embedded systems labs
