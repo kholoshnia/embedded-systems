@@ -1,0 +1,4 @@
+"/Users/vadim/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/211.7142.21/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/vadim/Documents/GitHub/kholoshnia/embedded-systems/lab-2
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/vadim/Documents/GitHub/kholoshnia/embedded-systems/lab-2/cmake-build-debug
