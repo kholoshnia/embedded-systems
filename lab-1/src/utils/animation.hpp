@@ -43,6 +43,7 @@ void animate(const unsigned int &state) {
 
       while (true) {
         if (button_pressed() || get_switches_state() != state) {
+          HAL_Delay(delay);
           green_only();
           break;
         }
